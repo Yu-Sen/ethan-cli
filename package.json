@@ -1,6 +1,6 @@
 {
   "name": "ethan-cli",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ethan-cli 脚手架",
   "main": "index.js",
   "scripts": {
