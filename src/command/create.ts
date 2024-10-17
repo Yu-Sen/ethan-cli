@@ -7,6 +7,10 @@ import path from "path";
 import fs from "fs-extra";
 import { select, input } from "@inquirer/prompts";
 import { clone } from "../utils/clone";
+import { name, version } from "../../package.json";
+import { gt } from "lodash";
+import log from "../utils/log";
+import axios, { AxiosResponse } from "axios";
 
 // 模板信息接口
 export interface ITemplate {
@@ -46,8 +50,29 @@ export async function isOverwrite(dirName: string) {
     ],
   });
 }
+export async function getNpmInfo(name: string) {
+  try {
+    return await axios.get(`https://registry.npmjs.org/${name}`);
+  } catch (e) {
+    log.error(`获取npm包信息失败，请检查网络或包名是否正确`);
+  }
+}
+
+export async function getNpmLatestVersion(name: string) {
+  const { data } = (await getNpmInfo(name)) as AxiosResponse;
+  return data["dist-tags"].latest;
+}
+
+export async function checkVersion(name: string, version: string) {
+  const latestVersion = await getNpmLatestVersion(name);
+  const needUpdate = gt(latestVersion, version);
+  if (needUpdate) {
+    log.info(`检测到新版本${latestVersion}，当前版本${version}`);
+  }
+}
 
 export async function create(dirName?: string) {
+  await checkVersion(name, version);
   // 如果未输入项目名称，则要求输入项目名称
   if (!dirName) {
     dirName = await input({ message: "请输入项目名称" });

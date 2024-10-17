@@ -8,11 +8,11 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-        "Vite",
-        "Vue3",
-        "TypeScript",
-        "Element-plus"
-    ],
+    "Vite",
+    "Vue3",
+    "TypeScript",
+    "Element-plus"
+  ],
   "author": "ethan",
   "bin": "./bin/index.js",
   "files": [
@@ -28,9 +28,12 @@
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@types/fs-extra": "^11.0.4",
+    "@types/lodash": "^4.17.10",
+    "axios": "^1.7.7",
     "chalk": "^5.3.0",
     "commander": "^12.1.0",
     "fs-extra": "^11.2.0",
+    "lodash": "^4.17.21",
     "log-symbols": "^7.0.0",
     "progress-estimator": "^0.3.1",
     "rollup": "^4.24.0",
